@@ -13,7 +13,7 @@ USE:
 ```
 var G = require('gfunk);
 console.log = G({…})
-    .override(console.log.bind(console));
+    .funk(console.log.bind(console));
 console.log(‘G’);
 ```
 

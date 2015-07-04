@@ -1,7 +1,8 @@
 var path = require('path')
   sinon = require('sinon'),
   chai = require('chai'),
-  sinonChai = require('sinon-chai')
+  sinonChai = require('sinon-chai'),
+  faker = require('faker')
   ;
 
 global.rootRequire = function(){
@@ -10,6 +11,7 @@ global.rootRequire = function(){
 }
 
 global.G = rootRequire();
+global.faker = faker;
 
 chai.should();
 chai.use(sinonChai);
