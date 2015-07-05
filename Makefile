@@ -20,3 +20,6 @@ test:			## run mocha tests (G={filter-keyword})
 		$(if $G, --grep $G --recursive,) \
 		$(if $F, $F) \
 		$(if $R, tests --recursive,) \
+
+tdd:			## run tests on file change
+	@nodemon ./node_modules/.bin/mocha -- tests --recursive
