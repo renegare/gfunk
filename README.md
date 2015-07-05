@@ -2,22 +2,29 @@
 
 Meaningful, Simplicity and Usefulness, all in one letter. The Trinity of G.
 
-INSTALL:
+## INSTALL
 
 ```
 $ npm install -S gfunk
 ```
 
-USE:
+## USE
 
 ```
-var G = require('gfunk);
-console.log = G({…})
-    .funk(console.log.bind(console));
-console.log(‘G’);
+var G = require('gfunk');
+var log = G([
+      {match:[/G/], exec: function(what){ console.log(what + ' funk.')}
+    }])
+    .funk(function(){
+      return console.log.apply(console, arguments);
+    });
+log('G');
+// Output:
+// G funk.
+// G
 ```
 
-TEST:
+## TEST
 
 ```
 $ git clone https://github.com/renegare/gfunk.git && \
