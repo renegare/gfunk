@@ -2,7 +2,7 @@
   "name": "gfunk",
   "version": "0.0.1",
   "description": "G Funk your existing functionality",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "mocha"
   },

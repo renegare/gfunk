@@ -6,7 +6,7 @@ var path = require('path')
   ;
 
 global.rootRequire = function(){
-  var module = path.join(__dirname, '..' , arguments[0] || 'index');
+  var module = path.join(__dirname, '..' , 'lib', arguments[0] || 'index');
   return require(module);
 }
 
