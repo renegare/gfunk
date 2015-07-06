@@ -22,3 +22,13 @@ test:			## run mocha tests (G={filter-phrase}, F={path/to/spec})
 
 tdd:			## run tests on file change
 	@nodemon ./node_modules/.bin/mocha -- tests/index.js tests --recursive
+
+doc: export BRANCH=gh-pages
+doc: export CURRENT_BRANCH=$(shell git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3)
+doc:			## generate documentation and push to branch gh-pages
+	-git branch -D $(BRANCH)
+	git checkout -b $(BRANCH)
+	./node_modules/.bin/jsdoc --readme README.md .
+	git add -A
+	git push origin $(BRANCH) --force
+	git checkout $(CURRENT_BRANCH)
