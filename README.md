@@ -43,7 +43,7 @@ I called this library 'G' Funk because, G stands for many things, like;
 If some one was to call you ‘a’, an obvious response could be “‘a’ what?”.
 
 Or take the ‘z’; "What do you meeeeeean?” is my response.
-"Do you mean a The Z Man? What happened to X Man or you calling me a ‘z’ celebrity?”
+"Do you mean The Z Man? What happened to X Man or you calling me a ‘z’ celebrity?”
 
 Can get quite offending pretty quickly if the wrong letter is used.
 

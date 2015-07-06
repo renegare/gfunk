@@ -12,6 +12,7 @@ global.rootRequire = function(){
 
 global.G = rootRequire();
 global.faker = faker;
+global.noop = function() {};
 
 chai.should();
 chai.use(sinonChai);

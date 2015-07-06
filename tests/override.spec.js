@@ -1,4 +1,3 @@
-
 describe('override', function(){
   var logger = {}, spy
     ;
@@ -37,13 +36,13 @@ describe('override', function(){
     spy.should.have.been.calledOn(logger);
   });
 
-  it('should throw an error when args length 1 and the arg is not a function', function(){
+  it('should throw an error when arity is 1 and yet the arg is not a function', function(){
       (function(){
         G().funk(faker.lorem.words())
       }).should.throw('You did not provide a function to override');
   });
 
-  it('should throw an error when args length 2 and the 2nd arg is not a name of an existent function', function(){
+  it('should throw an error when arity is 2 and yet the 2nd arg is not a name of an existent function', function(){
       var unknownMethod = faker.lorem.words(1).join('');
       (function(){
         G().funk(logger, unknownMethod)

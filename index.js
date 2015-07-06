@@ -1,29 +1,43 @@
 module.exports = G;
 
-var ArrayArgsMatcher = require('./matchers/array'),
-  FunctionArgsMatcher = require('./matchers/function')
+var ArrayArgsMatcher = require('./matchers/array-args'),
+  FunctionArgsMatcher = require('./matchers/function-args'),
+  AlwaysBooleanMatcher = require('./matchers/always-boolean')
 ;
 
 function assertFunk(funk, message) {
-  if(typeof funk !== 'function') {
+  if(!funk || funk.constructor !== Function) {
     throw new Error(message);
   }
 }
 
+/**
+ * Representing ...
+ * @function
+ * @param {Object[]} matchers
+ * @param {Object} opts
+ */
 function G(matchers, opts) {
   matchers = matchers || [];
   opts = opts || {};
 
-  matchers.map(function(matcher){
-    switch(matcher.match.constructor) {
-      case Array:
-        matcher.match = new ArrayArgsMatcher(matcher.match);
-        break;
-      case Function:
-        matcher.match = new FunctionArgsMatcher(matcher.match);
-        break;
-      default:
-        throw "WTF!?";
+  matchers.map(function(matcher, n){
+    try {
+      switch(matcher.match || matcher.match === false? matcher.match.constructor : undefined) {
+        case Array:
+          matcher.match = new ArrayArgsMatcher(matcher.match);
+          break;
+        case Function:
+          matcher.match = new FunctionArgsMatcher(matcher.match);
+          break;
+        case Boolean:
+          matcher.match = new AlwaysBooleanMatcher(matcher.match);
+          break;
+        default:
+           throw new Error('You can only use Function, Array of regexs or a static Booloean');
+      }
+    } catch(err) {
+      throw new Error('Bad matcher definition in index ' + n + '; ' + err.message);
     }
 
     return matcher;
