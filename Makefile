@@ -14,12 +14,11 @@ help:			## show this help.
 setup:			## install all dependencies
 	npm install
 
-test:			## run mocha tests (G={filter-keyword})
-	@./node_modules/.bin/mocha \
-		tests \
-		$(if $G, --grep $G --recursive,) \
-		$(if $F, $F) \
-		$(if $R, tests --recursive,) \
+test:			## run mocha tests (G={filter-phrase}, F={path/to/spec})
+	./node_modules/.bin/mocha \
+		tests/index.js \
+		$(if $G, --grep $G tests --recursive, $(if $F,,tests --recursive)) \
+		$(if $F, $F, $(if $G,,tests --recursive))
 
 tdd:			## run tests on file change
-	@nodemon ./node_modules/.bin/mocha -- tests --recursive
+	@nodemon ./node_modules/.bin/mocha -- tests/index.js tests --recursive

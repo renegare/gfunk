@@ -64,22 +64,20 @@ function G(matchers, opts) {
       assertFunk(cb, 'You did not provide a function to override');
 
       function exec(){
-        var returnVal, args = arguments;
+        var returnVal, args = Array.prototype.slice.call(arguments);
 
         function realExec() {
-          return cb.apply(context, args);
+          returnVal = cb.apply(context, arguments);
         }
 
-        var matched = !!matchers.filter(function(matcher){
+        var matched = matchers.filter(function(matcher){
           return matcher.match.test(args);
-        })
-        .map(function(matcher){
-          matcher.exec.apply(matcher, args);
-          returnVal = realExec();
-        }).length;
+        }).shift();
 
-        if(!matched) {
-          returnVal = realExec();
+        if(matched) {
+          matched.exec.apply(matched, [realExec].concat(args));
+        } else {
+          realExec.apply(null, args);
         }
 
         return returnVal;
