@@ -28,7 +28,8 @@ doc: export CURRENT_BRANCH=$(shell git symbolic-ref HEAD 2>/dev/null | cut -d"/"
 doc:			## generate documentation and push to branch gh-pages
 	-git branch -D $(BRANCH)
 	git checkout -b $(BRANCH)
-	./node_modules/.bin/jsdoc --readme README.md -d . .
+	./node_modules/.bin/jsdoc --readme README.md -d . ./lib
 	git add -A
+	git commit -am "Update documentation"
 	git push origin $(BRANCH) --force
 	git checkout $(CURRENT_BRANCH)
